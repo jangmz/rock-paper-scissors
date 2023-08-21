@@ -57,12 +57,17 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    
+    let player;
+    let computer;
+
+    for (let i = 0; i < 5; i++) {
+        player = getPlayerChoice();
+        computer = getComputerChoice();
+        console.log("Round:", i + 1);
+        console.log("Player:", player);
+        console.log("Computer:", computer);
+        console.log(playRound(player, computer));
+    }
 }
 
-const player = getPlayerChoice();
-const computer = getComputerChoice();
-
-console.log("Player choice:", player);
-console.log("Computer choice:", computer);
-console.log(playRound(player, computer));
+game();
