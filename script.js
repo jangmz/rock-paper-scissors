@@ -56,6 +56,10 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function game() {
+    
+}
+
 const player = getPlayerChoice();
 const computer = getComputerChoice();
 
