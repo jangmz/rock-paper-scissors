@@ -28,8 +28,8 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection) {
-    let computerSelection = getComputerChoice();
-    console.log(`Computer: ${computerSelection}`);
+    computerSelection = getComputerChoice();
+
     switch(playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
@@ -72,12 +72,38 @@ function game() {
     }
 }
 
+// displays result in a div
+function displayResult(result, playerSelection, computerSelection) {
+
+    const div = document.querySelector("#results");
+    const container = document.createElement("div");
+    const title = document.createElement("h1");
+    const playerInfo = document.createElement("p");
+    const computerInfo = document.createElement("p");
+    const resultInfo = document.createElement("p");
+
+    title.textContent = "Result";
+    playerInfo.textContent = `Player: ${playerSelection}`;
+    computerInfo.textContent = `Computer: ${computerSelection}`;
+    resultInfo.textContent = `Result of the match: ${result}`;
+
+    container.appendChild(title);
+    container.appendChild(playerInfo);
+    container.appendChild(computerInfo);
+    container.appendChild(resultInfo);
+
+    div.appendChild(container);
+}
+
+let computerSelection;
+let playerSelection;
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => button.addEventListener("click", function(event) {
-    console.log(`Player ${event.target.id}`); // displays the id of the clicked button
-    
+    playerSelection = event.target.id;
+
     // plays a round when a button is clicked
-    console.log(playRound(event.target.id));
+    //console.log(playRound(playerSelection));
+    displayResult(playRound(playerSelection), playerSelection, computerSelection);
 }));
 
 //game();
