@@ -27,7 +27,9 @@ function getPlayerChoice() {
     return playerInput;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    let computerSelection = getComputerChoice();
+    console.log(`Computer: ${computerSelection}`);
     switch(playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
@@ -70,4 +72,12 @@ function game() {
     }
 }
 
-game();
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener("click", function(event) {
+    console.log(`Player ${event.target.id}`); // displays the id of the clicked button
+    
+    // plays a round when a button is clicked
+    console.log(playRound(event.target.id));
+}));
+
+//game();
