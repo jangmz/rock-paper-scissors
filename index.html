@@ -7,11 +7,21 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Choose your weapon!</h1>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    
-    <div id="results"></div>
+    <div id="playerChoice">
+        <h1>Choose your weapon!</h1>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div id="score">
+        <h1>Score</h1>
+        <p>Player: <span id="playerScore"></span></p>
+        <p>Computer: <span id="computerScore"></span></p>
+    </div>
+        
+    <h1>Rounds history</h1>
+    <div id="history"></div>
+
+    <div id="gameover"></div>
 </body>
 </html>

@@ -29,31 +29,30 @@ function getPlayerChoice() {
 
 function playRound(playerSelection) {
     computerSelection = getComputerChoice();
-
     switch(playerSelection) {
         case "rock":
             if (computerSelection === "scissors") {
-                return "You won!";
+                return "player wins";
             } else if (computerSelection === "rock") {
-                return "Tie!";
+                return "tie";
             } else {
-                return "You lost!";
+                return "computer wins";
             }
         case "paper":
             if (computerSelection === "scissors") {
-                return "You lost!";
+                return "computer wins";
             } else if (computerSelection === "rock") {
-                return "You won!";
+                return "player wins";
             } else {
-                return "Tie!";
+                return "tie";
             }
         case "scissors":
             if (computerSelection === "scissors") {
-                return "Tie!";
+                return "tie";
             } else if (computerSelection === "rock") {
-                return "You lost!";
+                return "computer wins";
             } else {
-                return "You won!";
+                return "player wins";
             }
     }
 }
@@ -72,31 +71,48 @@ function game() {
     }
 }
 
-// displays result in a div
-function displayResult(result, playerSelection, computerSelection) {
-
-    const div = document.querySelector("#results");
-    const container = document.createElement("div");
-    const title = document.createElement("h1");
-    const playerInfo = document.createElement("p");
-    const computerInfo = document.createElement("p");
-    const resultInfo = document.createElement("p");
-
-    title.textContent = "Result";
-    playerInfo.textContent = `Player: ${playerSelection}`;
-    computerInfo.textContent = `Computer: ${computerSelection}`;
-    resultInfo.textContent = `Result of the match: ${result}`;
-
-    container.appendChild(title);
-    container.appendChild(playerInfo);
-    container.appendChild(computerInfo);
-    container.appendChild(resultInfo);
-
-    div.appendChild(container);
+function history(playerSelection, computerSelection, result) {
+    const history = document.querySelector("#history");
+    const p = document.createElement("p");
+    p.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}, Result: ${result}`;
+    history.appendChild(p);
 }
 
+// displays result in a div
+function displayResult(result, playerSelection, computerSelection) {
+    const playerPoints = document.querySelector("#playerScore");
+    const computerPoints = document.querySelector("#computerScore");
+
+    if (result === "player wins") {
+        playerScore++;
+        playerPoints.textContent = playerScore;
+    } else if (result === "computer wins") {
+        computerScore++;
+        computerPoints.textContent = computerScore;
+    }
+
+    history(playerSelection, computerSelection, result);
+}
+
+function checkWinner() {
+    if (playerScore === 5 || computerScore === 5) {
+        const div = document.querySelector("#gameover");
+        const h1 = document.createElement("h1");
+        if (playerScore === 5) {
+            h1.textContent = "YOU WON!";
+        } else {
+            h1.textContent = "GAME OVER, YOU LOST!";
+        }
+    
+        div.appendChild(h1);
+    }
+}
+
+let playerScore = 0;
+let computerScore = 0;
 let computerSelection;
 let playerSelection;
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => button.addEventListener("click", function(event) {
     playerSelection = event.target.id;
@@ -104,6 +120,5 @@ buttons.forEach(button => button.addEventListener("click", function(event) {
     // plays a round when a button is clicked
     //console.log(playRound(playerSelection));
     displayResult(playRound(playerSelection), playerSelection, computerSelection);
+    checkWinner();
 }));
-
-//game();
