@@ -103,9 +103,9 @@ function checkWinner() {
         } else {
             h1.textContent = "GAME OVER, YOU LOST!";
         }
-    
         div.appendChild(h1);
-    }
+        return true;
+    } else return false;
 }
 
 let playerScore = 0;
@@ -120,5 +120,13 @@ buttons.forEach(button => button.addEventListener("click", function(event) {
     // plays a round when a button is clicked
     //console.log(playRound(playerSelection));
     displayResult(playRound(playerSelection), playerSelection, computerSelection);
-    checkWinner();
+    if (checkWinner()) {
+        const div = document.querySelector("#gameover");
+        const reloadBtn = document.createElement("button");
+        reloadBtn.textContent = "START AGAIN";
+        reloadBtn.addEventListener("click", () => {
+            window.location.reload(true);
+        });
+        div.appendChild(reloadBtn);
+    }
 }));
